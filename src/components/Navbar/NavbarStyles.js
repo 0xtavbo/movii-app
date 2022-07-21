@@ -53,8 +53,14 @@ export const LinkContainerStyled = styled(motion.div)`
 `;
 
 export const LogoContainerStyled = styled.div`
+  display: flex;
+  text-align: center;
+  align-items: center;
+
   img {
-    height: 75px;
+    height: 55px;
+    filter: invert(100);
+    margin-right: 15px;
   }
 `;
 

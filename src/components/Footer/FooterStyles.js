@@ -6,4 +6,5 @@ export const FooterContainerStyled = styled.div`
   text-align: center;
   align-items: center;
   margin-top: 50px;
+  margin-bottom: 50px;
 `;

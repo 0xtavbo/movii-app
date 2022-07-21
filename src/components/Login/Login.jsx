@@ -16,27 +16,31 @@ const Login = () => {
     const regexEmail = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
     if (email === '' || password === '') {
-      swal(<h2>Fields cannot be blank</h2>);
+      swal({text: "Fields cannot be blank", html: true});
       return;
     }
 
     if (email !== '' && !regexEmail.test(email)) {
-      swal(<h2>Email invalid</h2>);
+      swal({text: "Email invalid", html: true});
       return;
     }
 
     if (email !== 'challenge@alkemy.org' || password !== 'react') {
-      swal(<h2>Credentials invalid</h2>);
+      swal({text: "Credentials invalid", html: true});
       return;
     }
 
     axios
       .post('http://challenge-react.alkemy.org', {email, password})
       .then(res => {
-        swal(<h2>Logged successfully</h2>)
+        swal({
+          title: "Logon successfully",
+          icon: "success",
+          timer: 3000
+        });
         const tokenReceived = res.data.token;
         localStorage.setItem('token', tokenReceived);
-        navigate('/list');
+        navigate('/discover');
       })
 
   }

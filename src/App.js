@@ -5,6 +5,7 @@ import Footer from "./components/Footer/Footer";
 import Navbar from "./components/Navbar/Navbar";
 import Layout from "./components/Layout/Layout";
 import "./App.css";
+import MovieDetails from "./components/Details/MovieDetails";
 
 function App() {
   const isAuth = localStorage.getItem("token");
@@ -14,7 +15,8 @@ function App() {
       <Navbar />
       <ReactDomRoutes>
         <Route path="/login" element={<Login />} />
-        <Route path="/list" element={<List />} />
+        <Route path="/discover" element={<List />} />
+        <Route path="/details" element={<MovieDetails />} />
       </ReactDomRoutes>
       <Footer />
     </Layout>

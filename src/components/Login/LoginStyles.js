@@ -30,22 +30,24 @@ export const LoginContainerStyled = styled.div`
 `;
 
 export const LoginButtonStyled = styled.button`
-  margin-top: 10px;
-  width: 8rem;
-  height: 2rem;
-  outline: none;
-  border: none;
-  border-radius: 10px;
-  background: var(--project-date-color);
-  color: white;
-  text-transform: uppercase;
-  font-weight: 600;
-  font-size: 1rem;
-  cursor: pointer;
+  background-color: var(--text-secondary);
+  border: 1px solid white;
+  white-space: nowrap;
   color: black;
+  cursor: pointer;
+  outline: none;
+  font-size: 1rem;
+  letter-spacing: 0.1rem;
+  border-radius: 0.5rem;
+  user-select: none;
+  padding: 0.7rem 2rem;
+  margin: 1rem;
+  transition: all 0.1s ease-in;
 
-  &:hover {
-    background-color: lightgoldenrodyellow;
+  @media screen and (max-width: 45em) {
+    padding: 1rem 1rem;
+    font-size: 1.5rem;
+    margin: 0.5rem;
   }
 `;
 

@@ -2,6 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom';
 import { LinkContainerStyled, LinksContainerStyled, NavbarContainerStyled } from './NavbarStyles';
 import { LogoContainerStyled } from './NavbarStyles';
+import Logo from '../../assets/logo.png'
 
 const Navbar = () => {
   const isAuth = localStorage.getItem("token");
@@ -10,7 +11,10 @@ const Navbar = () => {
       <NavbarContainerStyled>
         <LogoContainerStyled>
           <Link to='/'>
-            <img src='' alt='logo-app' />
+            <img src={Logo} alt='logo-app' />
+          </Link>
+          <Link to='/'>
+          <h2>Movii</h2>
           </Link>
         </LogoContainerStyled>
         <LinksContainerStyled>
@@ -22,13 +26,13 @@ const Navbar = () => {
               }}
             >Home</LinkContainerStyled>
           </Link>
-          <Link to={isAuth ? '/list' : '/login'}>
+          <Link to={isAuth ? '/discover' : '/login'}>
           <LinkContainerStyled
               whileHover={{
               scale: 1.2,
               transition: { duration: 1 },
               }}
-            >{isAuth ? 'List' : 'Login'}</LinkContainerStyled>
+            >{isAuth ? 'Discover' : 'Login'}</LinkContainerStyled>
           </Link>
         </LinksContainerStyled>
       </NavbarContainerStyled>
