@@ -45,4 +45,10 @@ export const ImageContainerStyled = styled.div`
 
 export const MovieOverviewContainer = styled.p`
   width: 400px;
+  font-size: 1.3rem;
+`;
+export const GenresContainerStyled = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
 `;

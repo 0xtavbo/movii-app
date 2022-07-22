@@ -72,3 +72,10 @@ export const TitleStyled = styled(motion.h4)`
   -webkit-text-fill-color: transparent;
   background-clip: text;
 `;
+
+export const SearcherContainerStyled = styled.div`
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
