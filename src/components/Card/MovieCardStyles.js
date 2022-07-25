@@ -74,3 +74,12 @@ export const ButtonStyled = styled.div`
     font-size: 1.3rem;
   }
 `;
+
+export const FavoriteIconStyled = styled.div`
+  display: flex;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  color: white;
+  font-size: 1.5rem;
+`;

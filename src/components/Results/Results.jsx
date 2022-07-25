@@ -8,7 +8,6 @@ const Results = () => {
   const [searchParams, ] = useSearchParams();
   const [results, setResults] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-
   const keyword = searchParams.get('keyword');
 
   useEffect(() => {
@@ -28,12 +27,13 @@ const Results = () => {
 
   return (
     <>
-    {!results
-      ? <p>No se encontraron resultados</p>
+    {isLoading && <p>Loading</p>}
+    {!keyword
+      ? <p>No results found</p>
       : 
       <div>
-        <h2>Buscando resultados para: {keyword}</h2>
-        <h2>Cantidad de resultados: {results.length}</h2>
+        <h2>Searching results for: {keyword}</h2>
+        <h2>Results: {results.length}</h2>
         <ListContainer>
           { results.map((movie) => {
             return (<MovieCard

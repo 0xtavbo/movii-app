@@ -3,7 +3,6 @@ import { InputStyled, SearchFormStyled, IconWrapperStyled } from './SearcherStyl
 import { AiOutlineSearch } from 'react-icons/ai';
 import { useNavigate } from 'react-router-dom';
 
-
 const Searcher = () => {
   const [keyword, setKeyword] = useState('');
 
@@ -11,21 +10,22 @@ const Searcher = () => {
 
   const handleSearch = (e) => {
     e.preventDefault();
-    setKeyword(e.target.value.trim());
+    setKeyword(e.target.value);
   }
 
   useEffect(() => {
-    navigate(`/results?keyword=${keyword}`)
+    if (keyword.length > 0) navigate(`/results?keyword=${keyword}`);
   }, [keyword])
 
   return (
     <SearchFormStyled>
       <InputStyled 
         type='text'
-        name='searcher'
+        name='keyword'
         placeholder='Search movie..'
         onChange={handleSearch}
-        value={keyword || ""}
+        value={keyword}
+        onClick={handleSearch}
       />
       <IconWrapperStyled>
         <AiOutlineSearch className='search-icon'/>

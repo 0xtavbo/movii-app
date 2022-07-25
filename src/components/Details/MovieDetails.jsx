@@ -41,7 +41,7 @@ const MovieDetails = () => {
 
   return (
     <MovieContainerStyled>
-      <ButtonStyled onClick={() => navigate('/discover')}>
+      <ButtonStyled onClick={() => navigate(-1)}>
         <BiArrowFromRight className='arrow-icon'/>
         Back to list
       </ButtonStyled>

@@ -43,6 +43,14 @@ const Navbar = () => {
               }}
             >{isAuth ? 'Discover' : 'Login'}</LinkContainerStyled>
           </Link>
+          <Link to='/favorites'>
+            <LinkContainerStyled
+              whileHover={{
+              scale: 1.2,
+              transition: { duration: 1 },
+              }}
+            >Favorites</LinkContainerStyled>
+          </Link>
         </LinksContainerStyled>
       </NavbarContainerStyled>
   )

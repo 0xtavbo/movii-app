@@ -5,7 +5,7 @@ import axios from 'axios';
 import swal from '@sweetalert/with-react';
 import { useNavigate } from 'react-router-dom'
 
-const List = () => {
+const List = ({favorites}) => {
   const [moviesList, setMoviesList] = useState([]);
 
   const navigate = useNavigate();
@@ -34,6 +34,7 @@ const List = () => {
     <ListContainer>
       { moviesList.map((movie) => {
         return (<MovieCard
+          fav={favorites}
           id={movie.id}
           key={movie.id}
           title={movie.title}
