@@ -34,6 +34,7 @@ const List = ({favorites}) => {
     <ListContainer>
       { moviesList.map((movie) => {
         return (<MovieCard
+          isFav={false}
           fav={favorites}
           id={movie.id}
           key={movie.id}

@@ -37,6 +37,7 @@ const Results = () => {
         <ListContainer>
           { results.map((movie) => {
             return (<MovieCard
+              isFav={false}
               id={movie.id}
               key={movie.id}
               title={movie.title}

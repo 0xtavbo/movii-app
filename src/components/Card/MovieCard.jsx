@@ -4,9 +4,28 @@ import { FiArrowRightCircle } from "react-icons/fi";
 import { AiOutlineHeart } from "react-icons/ai";
 import { Link } from 'react-router-dom';
 
-const MovieCard = ({fav, id, img, title, rating, votes, overview, popularity}) => {
+const MovieCard = ({isFav, fav, id, img, title, rating, votes, overview, popularity}) => {
   return (
-
+  <>
+    {isFav ?
+      <MovieCardStyled
+        whileHover={{
+          scale: 1.05,
+          transition: { duration: 0.5 },
+          }}
+      >
+        <FavoriteIconStyled
+          onClick={fav}
+          data-movie-id={id}
+        >
+          <AiOutlineHeart />
+        </FavoriteIconStyled>
+        <Link to={`/details?movieID=${id}`}>
+          <h3>{title}</h3>
+          <img src={img} alt={title} />
+        </Link>
+      </MovieCardStyled>
+    :
       <MovieCardStyled
         whileHover={{
           scale: 1.05,
@@ -32,6 +51,9 @@ const MovieCard = ({fav, id, img, title, rating, votes, overview, popularity}) =
           </ButtonStyled>
         </Link>
       </MovieCardStyled>
+    }
+  </>
+
 
   )
 }

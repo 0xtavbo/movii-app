@@ -26,15 +26,11 @@ const Favorites = ({favs}) => {
         {favorites.map((movie) => {
           return (
             <MovieCard
+              isFav={true}
               fav={favs}
               id={movie.id}
               key={movie.id}
               title={movie.title}
-/*               img={movie.poster_path} */
-/*               rating={movie.vote_average}
-              votes={movie.vote_count}
-              overview={movie.overview}
-              popularity={movie.popularity} */
             />
           );
         })}
