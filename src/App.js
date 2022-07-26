@@ -54,8 +54,14 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/discover" element={<List favorites={handleFavorite} />} />
         <Route path="/details" element={<MovieDetails />} />
-        <Route path="/results" element={<Results />} />
-        <Route path="/favorites" element={<Favorites />} />
+        <Route
+          path="/results"
+          element={<Results favorites={handleFavorite} />}
+        />
+        <Route
+          path="/favorites"
+          element={<Favorites favorites={handleFavorite} />}
+        />
       </ReactDomRoutes>
 
       <Footer />

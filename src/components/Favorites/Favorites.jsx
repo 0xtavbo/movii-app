@@ -3,8 +3,8 @@ import { ListContainer } from "../List/ListStyles";
 import MovieCard from "../Card/MovieCard";
 import { useNavigate } from "react-router-dom";
 
-const Favorites = ({favs}) => {
-  const [favorites, setFavorites] = useState([]);
+const Favorites = ({favorites}) => {
+  const [favoriteMovies, setFavoriteMovies] = useState([]);
 
   const navigate = useNavigate();
   const token = localStorage.getItem("token");
@@ -16,21 +16,22 @@ const Favorites = ({favs}) => {
   useEffect(() => {
     const localFavorites = localStorage.getItem('movii_favs');
 
-    if (localFavorites !== null) setFavorites(JSON.parse(localFavorites));
+    if (localFavorites !== null) setFavoriteMovies(JSON.parse(localFavorites));
   }, []);
 
   return (
     <>
       <h1>Favorites</h1>
       <ListContainer>
-        {favorites.map((movie) => {
+        {favoriteMovies.map((movie) => {
           return (
             <MovieCard
               isFav={true}
-              fav={favs}
+              fav={favorites}
               id={movie.id}
               key={movie.id}
               title={movie.title}
+              img={movie.imgSource}
             />
           );
         })}
