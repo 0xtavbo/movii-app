@@ -15,6 +15,9 @@ const Favorites = ({handleFavorite, favorites}) => {
     <>
       <h1>Favorites</h1>
       <ListContainer>
+        {favorites.length < 1 &&
+          <p>You don't have favorite movies</p>
+        }
         {favorites.map((movie) => {
           return (
             <MovieCard

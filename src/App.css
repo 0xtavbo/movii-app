@@ -17,6 +17,7 @@ body {
     color: white;
     -webkit-tap-highlight-color: transparent;
     overflow-x: hidden;
+    width: 100vw;
 }
 a {
   text-decoration: none;
