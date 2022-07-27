@@ -1,4 +1,5 @@
 import "./App.css";
+import { useState, useEffect } from "react";
 import { Routes as ReactDomRoutes, Route } from "react-router-dom";
 import Login from "./components/Login/Login";
 import List from "./components/List/List";
@@ -10,17 +11,23 @@ import Results from "./components/Results/Results";
 import Favorites from "./components/Favorites/Favorites";
 
 function App() {
-  const isAuth = localStorage.getItem("token");
-  let favoriteMovies;
+  const [favoriteMovies, setFavoriteMovies] = useState([]);
+  let localFavorites;
   let tempFavMovies;
 
-  const handleFavorite = (e) => {
-    favoriteMovies = localStorage.getItem("movii_favs");
+  useEffect(() => {
+    const localFavorites = localStorage.getItem("movii_favs");
 
-    if (favoriteMovies === null) {
+    if (localFavorites !== null) setFavoriteMovies(JSON.parse(localFavorites));
+  }, []);
+
+  const handleFavorite = (e) => {
+    localFavorites = localStorage.getItem("movii_favs");
+
+    if (localFavorites === null) {
       tempFavMovies = [];
     } else {
-      tempFavMovies = JSON.parse(favoriteMovies);
+      tempFavMovies = JSON.parse(localFavorites);
     }
 
     const movieToHandle = {
@@ -38,11 +45,13 @@ function App() {
     if (!movieIsInArray) {
       tempFavMovies.push(movieToHandle);
       localStorage.setItem("movii_favs", JSON.stringify(tempFavMovies));
+      setFavoriteMovies(tempFavMovies);
     } else {
       let moviesLeft = tempFavMovies.filter((movie) => {
         return movie.id !== movieToHandle.id;
       });
       localStorage.setItem("movii_favs", JSON.stringify(moviesLeft));
+      setFavoriteMovies(moviesLeft);
     }
   };
 
@@ -52,15 +61,30 @@ function App() {
 
       <ReactDomRoutes>
         <Route path="/login" element={<Login />} />
-        <Route path="/discover" element={<List favorites={handleFavorite} />} />
         <Route path="/details" element={<MovieDetails />} />
         <Route
+          path="/discover"
+          element={
+            <List handleFavorite={handleFavorite} favorites={favoriteMovies} />
+          }
+        />
+        <Route
           path="/results"
-          element={<Results favorites={handleFavorite} />}
+          element={
+            <Results
+              handleFavorite={handleFavorite}
+              favorites={favoriteMovies}
+            />
+          }
         />
         <Route
           path="/favorites"
-          element={<Favorites favorites={handleFavorite} />}
+          element={
+            <Favorites
+              handleFavorite={handleFavorite}
+              favorites={favoriteMovies}
+            />
+          }
         />
       </ReactDomRoutes>
 

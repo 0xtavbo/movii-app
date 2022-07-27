@@ -6,7 +6,8 @@ export const MovieCardStyled = styled(motion.div)`
   width: 300px;
   border-radius: 15px;
   padding: 1rem;
-  height: calc(100vh / 1.2);
+  height: ${(props) =>
+    props.favorite ? "calc(100vh / 1.7)" : "calc(100vh / 1.2)"};
   position: relative;
   cursor: pointer;
 

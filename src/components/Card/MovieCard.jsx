@@ -1,24 +1,38 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { MovieCardStyled, SpanStyled, ButtonStyled, FavoriteIconStyled } from './MovieCardStyles'
 import { FiArrowRightCircle } from "react-icons/fi";
-import { AiOutlineHeart } from "react-icons/ai";
+import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import { Link } from 'react-router-dom';
 
-const MovieCard = ({isFav, fav, id, img, title, rating, votes, overview, popularity}) => {
+const MovieCard = ({isFavorite, favorites, handleFavorite, id, img, title, rating, votes, overview, popularity}) => {
+  const [isInFavorites, setIsInFavorites] = useState(false);
+
+  useEffect(() => {
+    setIsInFavorites(favorites.some(movie => movie.id.toString() === id.toString()));
+  }, [isInFavorites])
+  
+  const toggleFavorite = () => {
+    setIsInFavorites(!isInFavorites)
+  }
+
   return (
   <>
-    {isFav ?
-      <MovieCardStyled
+    {isFavorite ?
+      // render Card for Favorites
+      <MovieCardStyled favorite
         whileHover={{
           scale: 1.05,
           transition: { duration: 0.5 },
           }}
-      >
+      > 
         <FavoriteIconStyled
-          onClick={fav}
+          onClick={(e) => {
+            toggleFavorite();
+            handleFavorite(e);}
+          }
           data-movie-id={id}
         >
-          <AiOutlineHeart />
+          {isInFavorites ? <AiFillHeart style={{color: 'red'}}/> : <AiOutlineHeart />}
         </FavoriteIconStyled>
         <Link to={`/details?movieID=${id}`}>
           <h3>{title}</h3>
@@ -26,6 +40,7 @@ const MovieCard = ({isFav, fav, id, img, title, rating, votes, overview, popular
         </Link>
       </MovieCardStyled>
     :
+      // render Card for Discover and Search
       <MovieCardStyled
         whileHover={{
           scale: 1.05,
@@ -33,10 +48,13 @@ const MovieCard = ({isFav, fav, id, img, title, rating, votes, overview, popular
           }}
       >
         <FavoriteIconStyled
-          onClick={fav}
+          onClick={(e) => {
+            toggleFavorite();
+            handleFavorite(e);}
+          }
           data-movie-id={id}
         >
-          <AiOutlineHeart />
+          {isInFavorites ? <AiFillHeart style={{color: 'red'}}/> : <AiOutlineHeart />}
         </FavoriteIconStyled>
         <Link to={`/details?movieID=${id}`}>
           <h3>{title}</h3>
