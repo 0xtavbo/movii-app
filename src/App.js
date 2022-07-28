@@ -60,6 +60,12 @@ function App() {
       <Navbar />
 
       <ReactDomRoutes>
+        <Route
+          path="/"
+          element={
+            <List handleFavorite={handleFavorite} favorites={favoriteMovies} />
+          }
+        />
         <Route path="/login" element={<Login />} />
         <Route path="/details" element={<MovieDetails />} />
         <Route

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { ListContainer } from './ListStyles';
 import MovieCard from '../Card/MovieCard';
 import { useNavigate } from 'react-router-dom'
-import useAxios from '../../hooks/useAxios';
+import useAxiosDiscover from '../../hooks/useAxiosDiscover';
 import swal from '@sweetalert/with-react';
 
 const List = ({handleFavorite, favorites}) => {
@@ -12,7 +12,7 @@ const List = ({handleFavorite, favorites}) => {
   const navigate = useNavigate();
   const token = localStorage.getItem('token');
 
-  const [error, pageNumber, results] = useAxios(1);
+  const [error, pageNumber, results, isLoading] = useAxiosDiscover(1);
 
   useEffect(() => {
     if(!token) navigate('/login');
@@ -22,12 +22,13 @@ const List = ({handleFavorite, favorites}) => {
     if(results) {
       setMoviesList(results);
       setPage(pageNumber);
-    } else {
+    } 
+    if (error !== '') {
       swal(error, {
         className: "bg-color",
       });
     }  
-  }, [])
+  }, [results])
 
   return (
     <>

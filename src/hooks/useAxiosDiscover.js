@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-const useAxios = (page) => {
+const useAxiosDiscover = (page) => {
   const [pageNumber, setPageNumber] = useState("");
   const [results, setResults] = useState([]);
   const [error, setError] = useState("");
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     fetchData(page);
@@ -20,10 +21,11 @@ const useAxios = (page) => {
       })
       .catch((error) => {
         setError("API call network error");
-      });
+      })
+      .finally(() => setIsLoading(false));
   };
 
-  return [error, pageNumber, results];
+  return [error, pageNumber, results, isLoading];
 };
 
-export default useAxios;
+export default useAxiosDiscover;

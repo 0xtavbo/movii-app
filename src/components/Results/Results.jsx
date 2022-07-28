@@ -1,29 +1,24 @@
 import React, {useState, useEffect} from 'react';
 import { useSearchParams } from 'react-router-dom';
-import axios from 'axios';
 import { ListContainer } from '../List/ListStyles';
 import MovieCard from '../Card/MovieCard';
+import useAxiosSearch from '../../hooks/useAxiosSearch';
 
 const Results = ({handleFavorite, favorites}) => {
   const [searchParams, ] = useSearchParams();
   const [results, setResults] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const keyword = searchParams.get('keyword');
+  const { searchMovie } = useAxiosSearch();
 
   useEffect(() => {
-    const endPoint = `https://api.themoviedb.org/3/search/movie?api_key=41b1193a31de706dbf8d3e652263a058&page=1&language=en-US&query=${keyword}`;
-    axios.get(endPoint)
-      .then(res => {
-        const apiData = res.data;
-        setResults(apiData.results);
-        setIsLoading(false);
-      })
-      .catch(error => {
-        console.log('API call error, no query keyword for search');
-      })
-  }, [keyword])
+    const [error, pageNumber, searchResults, loading] = searchMovie(keyword);
 
-  console.log(results);
+    if (searchResults) {
+      setResults(searchResults);
+      setIsLoading(loading);
+    } 
+  }, [keyword])
 
   return (
     <>
