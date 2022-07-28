@@ -8,7 +8,9 @@ import {
   DetailContainerStyled,
   ImageContainerStyled,
   MovieOverviewContainer,
-  GenresContainerStyled
+  ContainerStyled,
+  GenreStyled,
+  ProductionStyled
 } from './MovieDetailsStyles';
 import {BiArrowFromRight} from "react-icons/bi";
 
@@ -55,18 +57,19 @@ const MovieDetails = () => {
             </ImageContainerStyled>
             <div>
               <MovieOverviewContainer>{movie.overview}</MovieOverviewContainer>
-              <span>Genres: </span>
-              <GenresContainerStyled>                  
+              <span><b>Genres: </b></span>
+              <ContainerStyled>                  
                 {movie.genres.map((genre, index) => {
-                  return <p key={index}>{genre.name}</p>
+                  return <GenreStyled key={index}>{genre.name}</GenreStyled>
                 })}
-              </GenresContainerStyled>
-              <div>Production: 
+              </ContainerStyled>
+              <span><b>Productions: </b></span>
+              <ContainerStyled>
                 {movie.production_companies.map((company, index) => {
-                  return <p key={index}>{company.name}</p>
+                  return <ProductionStyled key={index}>{company.name}</ProductionStyled>
                 })}
-              </div>
-              <p>Release date: {movie.release_date}</p>
+              </ContainerStyled>
+              <p><b>Release date: </b>{movie.release_date}</p>
             </div>
           </DetailContainerStyled>
         </>

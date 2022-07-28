@@ -1,31 +1,32 @@
 import React, { useEffect, useState } from 'react'
 import { ListContainer } from './ListStyles';
 import MovieCard from '../Card/MovieCard';
-import axios from 'axios';
-import swal from '@sweetalert/with-react';
 import { useNavigate } from 'react-router-dom'
+import useAxios from '../../hooks/useAxios';
+import swal from '@sweetalert/with-react';
 
 const List = ({handleFavorite, favorites}) => {
   const [moviesList, setMoviesList] = useState([]);
+  const [page, setPage] = useState(1);
 
   const navigate = useNavigate();
   const token = localStorage.getItem('token');
+
+  const [error, pageNumber, results] = useAxios(1);
 
   useEffect(() => {
     if(!token) navigate('/login');
   }, [])
 
   useEffect(() => {
-    const endPoint = 'https://api.themoviedb.org/3/discover/movie?api_key=41b1193a31de706dbf8d3e652263a058&language=en-US&page=1';
-    axios.get(endPoint)
-      .then(res => {
-        const apiData = res.data;
-        setMoviesList(apiData.results);
-      })
-      .catch(error => {
-        swal("API call network error",{
-          className: "bg-color"});
+    if(results) {
+      setMoviesList(results);
+      setPage(pageNumber);
+    } else {
+      swal(error, {
+        className: "bg-color",
       });
+    }  
   }, [])
 
   return (
