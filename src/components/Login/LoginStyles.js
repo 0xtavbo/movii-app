@@ -38,7 +38,7 @@ export const LoginButtonStyled = styled.button`
   outline: none;
   font-size: 1rem;
   letter-spacing: 0.1rem;
-  border-radius: 0.5rem;
+  border-radius: 25px;
   user-select: none;
   padding: 0.7rem 2rem;
   margin: 1rem;
