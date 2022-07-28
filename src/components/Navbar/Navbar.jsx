@@ -27,14 +27,6 @@ const Navbar = () => {
           <Searcher />
         </SearcherContainerStyled>
         <LinksContainerStyled>
-          <Link to='/'>
-            <LinkContainerStyled
-              whileHover={{
-              scale: 1.2,
-              transition: { duration: 1 },
-              }}
-            >Home</LinkContainerStyled>
-          </Link>
           <Link to={isAuth ? '/discover' : '/login'}>
           <LinkContainerStyled
               whileHover={{
