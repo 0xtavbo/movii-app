@@ -12,6 +12,7 @@ import Favorites from "./components/Favorites/Favorites";
 
 function App() {
   const [favoriteMovies, setFavoriteMovies] = useState([]);
+  const [isAuth, setIsAuth] = useState(false);
   let localFavorites;
   let tempFavMovies;
 
@@ -20,6 +21,15 @@ function App() {
 
     if (localFavorites !== null) setFavoriteMovies(JSON.parse(localFavorites));
   }, []);
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    setIsAuth(false);
+  };
+
+  const handleLogin = () => {
+    setIsAuth(true);
+  };
 
   const handleFavorite = (e) => {
     localFavorites = localStorage.getItem("movii_favs");
@@ -57,7 +67,7 @@ function App() {
 
   return (
     <Layout>
-      <Navbar />
+      <Navbar handleLogout={handleLogout} isAuth={isAuth} />
 
       <ReactDomRoutes>
         <Route
@@ -66,7 +76,7 @@ function App() {
             <List handleFavorite={handleFavorite} favorites={favoriteMovies} />
           }
         />
-        <Route path="/login" element={<Login />} />
+        <Route path="/login" element={<Login handleLogin={handleLogin} />} />
         <Route path="/details" element={<MovieDetails />} />
         <Route
           path="/discover"

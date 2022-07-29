@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import axios from "axios";
 
-const useAxiosSearch = (keyword) => {
+const useAxiosSearch = () => {
   const [pageNumber, setPageNumber] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const [error, setError] = useState("");

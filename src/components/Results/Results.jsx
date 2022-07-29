@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { useSearchParams, useNavigate } from 'react-router-dom';
 import { ListContainer } from '../List/ListStyles';
 import MovieCard from '../Card/MovieCard';
 import useAxiosSearch from '../../hooks/useAxiosSearch';
@@ -10,6 +10,12 @@ const Results = ({handleFavorite, favorites}) => {
   const [isLoading, setIsLoading] = useState(true);
   const keyword = searchParams.get('keyword');
   const { searchMovie } = useAxiosSearch();
+  const token = localStorage.getItem('token');
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if(!token) navigate('/login');
+  }, [])
 
   useEffect(() => {
     const [error, pageNumber, searchResults, loading] = searchMovie(keyword);
@@ -19,7 +25,7 @@ const Results = ({handleFavorite, favorites}) => {
       setIsLoading(loading);
     } 
   }, [keyword])
-
+  
   return (
     <>
     {isLoading && <p>Loading</p>}

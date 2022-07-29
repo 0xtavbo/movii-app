@@ -49,7 +49,21 @@ export const LinkContainerStyled = styled(motion.div)`
   flex-direction: row;
   font-size: 1.1rem;
   align-items: center;
-  margin-right: 25px;
+  margin-right: 20px;
+`;
+
+export const AuthContainerStyled = styled(motion.div)`
+  display: flex;
+  flex-direction: row;
+  font-size: 1.1rem;
+  align-items: center;
+  margin-right: 15px;
+  width: 100px;
+
+  .filogout,
+  .filogin {
+    margin-right: 5px;
+  }
 `;
 
 export const LogoContainerStyled = styled.div`

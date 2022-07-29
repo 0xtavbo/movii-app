@@ -22,7 +22,7 @@ const Searcher = () => {
       <InputStyled 
         type='text'
         name='keyword'
-        placeholder='Search movie..'
+        placeholder='Search movie...'
         onChange={handleSearch}
         value={keyword}
         onClick={handleSearch}

@@ -32,7 +32,7 @@ const List = ({handleFavorite, favorites}) => {
 
   return (
     <>
-    <h1>List of movies</h1>
+    <h1>Trending movies</h1>
     <ListContainer>
       { moviesList.map((movie) => {
         return (<MovieCard

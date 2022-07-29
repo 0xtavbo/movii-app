@@ -1,11 +1,12 @@
 import React from 'react'
 import { LoginContainerStyled, LoginWrapper, LoginButtonStyled, InputStyled, TitleStyled } from './LoginStyles'
-import axios from 'axios';
 import swal from '@sweetalert/with-react';
 import { useNavigate } from 'react-router-dom';
+import useAxiosLogin from '../../hooks/useAxiosLogin';
 
-const Login = () => {
+const Login = ({handleLogin}) => {
   const navigate = useNavigate();
+  const { postLoginUser } = useAxiosLogin();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -30,19 +31,21 @@ const Login = () => {
       return;
     }
 
-    axios
-      .post('http://challenge-react.alkemy.org', {email, password})
-      .then(res => {
+    postLoginUser(email, password).then(result => {
+      if (result) {
+        handleLogin();
+        navigate('/discover');
         swal({
           title: "Logon successfully",
           icon: "success",
-          timer: 3000
+          timer: 1500
+        });  
+      } else {
+        swal({
+          title: "Logon failed"
         });
-        const tokenReceived = res.data.token;
-        localStorage.setItem('token', tokenReceived);
-        navigate('/discover');
-      })
-
+      }
+    });
   }
 
   return (
