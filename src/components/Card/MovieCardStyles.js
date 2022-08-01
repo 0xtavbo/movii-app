@@ -16,6 +16,7 @@ export const MovieCardStyled = styled(motion.div)`
     margin-bottom: 1rem;
     border-radius: 15px;
   }
+
   h3 {
     font-weight: 600;
     font-size: 1.3rem;

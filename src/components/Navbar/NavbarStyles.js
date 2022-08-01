@@ -42,6 +42,10 @@ export const LinksContainerStyled = styled.div`
   a {
     padding: 1rem 1.5rem;
   }
+
+  @media (max-width: 400px) {
+    display: none;
+  }
 `;
 
 export const LinkContainerStyled = styled(motion.div)`
@@ -76,6 +80,12 @@ export const LogoContainerStyled = styled.div`
     filter: invert(100);
     margin-right: 15px;
   }
+
+  @media (max-width: 800px) {
+    h2 {
+      display: none;
+    }
+  }
 `;
 
 export const TitleStyled = styled(motion.h4)`
@@ -92,4 +102,21 @@ export const SearcherContainerStyled = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+
+  @media (max-width: 400px) {
+    display: none;
+  }
+`;
+
+export const BurgerMenuContainerStyled = styled.div`
+  display: none;
+
+  @media (max-width: 400px) {
+    display: flex;
+  }
+`;
+
+export const BurgerIconStyled = styled.div`
+  display: flex;
+  font-size: 2rem;
 `;

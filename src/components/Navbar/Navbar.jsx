@@ -1,19 +1,30 @@
-import React, {useEffect} from 'react'
+import React, {useEffect, useState} from 'react'
 import { Link } from 'react-router-dom';
 import {
   LinkContainerStyled,
   LinksContainerStyled,
   NavbarContainerStyled,
   SearcherContainerStyled,
-  AuthContainerStyled
+  AuthContainerStyled,
+  BurgerMenuContainerStyled,
+  BurgerIconStyled
 } from './NavbarStyles';
+import ModalMenu from './ModalMenu/ModalMenu';
 import { LogoContainerStyled } from './NavbarStyles';
-import Logo from '../../assets/logo.png'
+import Logo from '../../assets/logo.png';
 import Searcher from '../Searcher/Searcher';
-import {FiLogOut,FiLogIn} from "react-icons/fi";
+import {FiLogOut,FiLogIn,FiMenu} from "react-icons/fi";
+import { AnimatePresence } from 'framer-motion';
 
 const Navbar = ({handleLogout, isAuth}) => {
   let isLogged = isAuth;
+  const [menuIsOpen, setMenuIsOpen] = useState(false);
+
+  console.log('menu bool', menuIsOpen);
+
+  const hiddenMenu = () => {
+    setMenuIsOpen(!menuIsOpen);
+  }
 
   useEffect(() => {
     isLogged = isAuth ? true : false;
@@ -61,6 +72,14 @@ const Navbar = ({handleLogout, isAuth}) => {
             </AuthContainerStyled>
           </Link>
         </LinksContainerStyled>
+        <BurgerMenuContainerStyled>
+          <BurgerIconStyled>
+            <FiMenu onClick={() => {
+              setMenuIsOpen(!menuIsOpen);
+              }}/>
+          </BurgerIconStyled>
+        </BurgerMenuContainerStyled>
+        <AnimatePresence>{menuIsOpen && <ModalMenu hiddenMenu={hiddenMenu} />}</AnimatePresence>
       </NavbarContainerStyled>
   )
 }
