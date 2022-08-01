@@ -33,8 +33,8 @@ const Navbar = ({handleLogout, isAuth}) => {
           { isLogged && <Searcher />}
         </SearcherContainerStyled>
         <LinksContainerStyled>
-          <Link to='/discover'>
-            <LinkContainerStyled
+        { isLogged && <Link to='/discover'>
+          <LinkContainerStyled
                 whileHover={{
                 scale: 1.2,
                 transition: { duration: 1 },
@@ -42,8 +42,8 @@ const Navbar = ({handleLogout, isAuth}) => {
             >
             Discover
             </LinkContainerStyled>
-          </Link>
-          <Link to='/favorites'>
+          </Link> }
+          { isLogged &&  <Link to='/favorites'>
             <LinkContainerStyled
               whileHover={{
               scale: 1.2,
@@ -51,7 +51,7 @@ const Navbar = ({handleLogout, isAuth}) => {
               }}
             >Favorites
             </LinkContainerStyled>
-          </Link>
+          </Link> }
           <Link to='/login'>
             <AuthContainerStyled onClick={handleLogout}>
               {isLogged

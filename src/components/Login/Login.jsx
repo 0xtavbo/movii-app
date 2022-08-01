@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { LoginContainerStyled, LoginWrapper, LoginButtonStyled, InputStyled, TitleStyled } from './LoginStyles'
 import swal from '@sweetalert/with-react';
 import { useNavigate } from 'react-router-dom';
@@ -6,7 +6,7 @@ import useAxiosLogin from '../../hooks/useAxiosLogin';
 
 const Login = ({handleLogin}) => {
   const navigate = useNavigate();
-  const { postLoginUser } = useAxiosLogin();
+  const { loginSuccess, postLoginUser } = useAxiosLogin();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -31,22 +31,20 @@ const Login = ({handleLogin}) => {
       return;
     }
 
-    postLoginUser(email, password).then(result => {
-      if (result) {
-        handleLogin();
-        navigate('/discover');
-        swal({
-          title: "Logon successfully",
-          icon: "success",
-          timer: 1500
-        });  
-      } else {
-        swal({
-          title: "Logon failed"
-        });
-      }
-    });
+    postLoginUser(email, password);
   }
+
+  useEffect(() => {
+    if (loginSuccess) {
+      swal({
+        title: "Logon successfully",
+        icon: "success",
+        timer: 1500
+      });  
+      handleLogin();
+      navigate('/discover');
+    }
+  }, [loginSuccess])
 
   return (
     <LoginWrapper>

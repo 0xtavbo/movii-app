@@ -15,12 +15,10 @@ const useAxiosLogin = () => {
         });
     } catch (err) {
       setLoginSuccess(false);
-      return loginSuccess;
     }
-    return loginSuccess;
   };
 
-  return { postLoginUser };
+  return { loginSuccess, postLoginUser };
 };
 
 export default useAxiosLogin;
