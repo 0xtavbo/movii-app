@@ -8,6 +8,18 @@ export const MovieContainerStyled = styled.div`
   img {
     border-radius: 15px;
   }
+
+  @media (max-width: 400px) {
+    font-size: 0.7rem;
+
+    img {
+      height: auto;
+      width: auto;
+      max-width: 380px;
+      max-height: 420px;
+      margin-bottom: 15px;
+    }
+  }
 `;
 
 export const ButtonStyled = styled.div`
@@ -42,33 +54,27 @@ export const DetailContainerStyled = styled.div`
   justify-content: center;
   gap: 40px;
   align-items: center;
-  text-align: center;
   margin: 0 auto;
+  max-width: 900px;
 
   @media (max-width: 400px) {
     flex-direction: column;
-    justify-content: center;
-    width: 90vw;
-
-    img {
-      width: 100%;
-    }
+    font-size: 1rem;
+    gap: 0px;
+    max-width: 300px;
   }
 `;
 
 export const ImageContainerStyled = styled.div`
   display: flex;
-  height: 600px;
 `;
 
-export const MovieOverviewContainer = styled.p`
-  width: 400px;
-  font-size: 1.3rem;
-  text-align: center;
+export const MovieOverviewContainer = styled.div`
+  font-size: 1.2rem;
+  margin-bottom: 15px;
 
   @media (max-width: 400px) {
-    font-size: 1rem;
-    width: 350px;
+    font-size: 1.1rem;
   }
 `;
 
@@ -77,7 +83,6 @@ export const ContainerStyled = styled.div`
   flex-direction: row;
   justify-content: center;
   flex-wrap: wrap;
-  width: 400px;
   margin-bottom: 10px;
 `;
 
