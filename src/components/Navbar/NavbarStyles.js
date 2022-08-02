@@ -118,5 +118,5 @@ export const BurgerMenuContainerStyled = styled.div`
 
 export const BurgerIconStyled = styled.div`
   display: flex;
-  font-size: 2rem;
+  font-size: 2.5rem;
 `;

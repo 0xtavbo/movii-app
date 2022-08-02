@@ -3,6 +3,7 @@ import styled from "styled-components";
 export const MovieContainerStyled = styled.div`
   display: flex;
   flex-direction: column;
+  justify-content: center;
 
   img {
     border-radius: 15px;
@@ -29,6 +30,10 @@ export const ButtonStyled = styled.div`
   &:hover {
     color: white;
   }
+
+  @media (max-width: 400px) {
+    margin: 0 auto;
+  }
 `;
 
 export const DetailContainerStyled = styled.div`
@@ -38,6 +43,17 @@ export const DetailContainerStyled = styled.div`
   gap: 40px;
   align-items: center;
   text-align: center;
+  margin: 0 auto;
+
+  @media (max-width: 400px) {
+    flex-direction: column;
+    justify-content: center;
+    width: 90vw;
+
+    img {
+      width: 100%;
+    }
+  }
 `;
 
 export const ImageContainerStyled = styled.div`
@@ -48,7 +64,14 @@ export const ImageContainerStyled = styled.div`
 export const MovieOverviewContainer = styled.p`
   width: 400px;
   font-size: 1.3rem;
+  text-align: center;
+
+  @media (max-width: 400px) {
+    font-size: 1rem;
+    width: 350px;
+  }
 `;
+
 export const ContainerStyled = styled.div`
   display: flex;
   flex-direction: row;

@@ -20,8 +20,6 @@ const Navbar = ({handleLogout, isAuth}) => {
   let isLogged = isAuth;
   const [menuIsOpen, setMenuIsOpen] = useState(false);
 
-  console.log('menu bool', menuIsOpen);
-
   const hiddenMenu = () => {
     setMenuIsOpen(!menuIsOpen);
   }
@@ -79,7 +77,13 @@ const Navbar = ({handleLogout, isAuth}) => {
               }}/>
           </BurgerIconStyled>
         </BurgerMenuContainerStyled>
-        <AnimatePresence>{menuIsOpen && <ModalMenu hiddenMenu={hiddenMenu} />}</AnimatePresence>
+        <AnimatePresence>{menuIsOpen
+          && <ModalMenu
+            hiddenMenu={hiddenMenu}
+            isLogged={isLogged}
+            handleLogout={handleLogout}
+          />}
+        </AnimatePresence>
       </NavbarContainerStyled>
   )
 }

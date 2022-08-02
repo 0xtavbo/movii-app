@@ -1,12 +1,27 @@
-import React from 'react'
-import { MdOutlineClose } from 'react-icons/md';
-import { ContainerStyled,
+import React, {useEffect} from 'react'
+import { MenuContainerStyled,
 CloseButtonContainerStyled,
-CloseButtonStyled } from './ModalMenuStyles';
+CloseButtonStyled,
+LinksContainerStyled,
+LinkContainerStyled,
+AuthContainerStyled } from './ModalMenuStyles';
+import { Link } from 'react-router-dom';
+import {FiLogOut,FiLogIn} from "react-icons/fi";
 
-const ModalMenu = ({hiddenMenu}) => {
+const ModalMenu = ({hiddenMenu, isLogged, handleLogout}) => {
+  let userLogged = isLogged;
+
+  useEffect(() => {
+    userLogged = isLogged ? true : false;
+  }, [isLogged])
+
+  const handleModalLogout = () => {
+    handleLogout();
+    hiddenMenu();
+  }
+
   return (
-    <ContainerStyled
+    <MenuContainerStyled
       initial={{ translateX: 600 }}
       animate={{ translateX: 0 }}
       exit={{ translateX: 600 }}
@@ -17,12 +32,26 @@ const ModalMenu = ({hiddenMenu}) => {
           X
         </CloseButtonStyled>
       </CloseButtonContainerStyled>
-      <div>
-        <p>DISCOVER</p>
-        <p>FAVORITES</p>
-        <p>LOGOUT</p>
-      </div>
-    </ContainerStyled>
+      <LinksContainerStyled>
+        { userLogged && <Link to='/discover'>
+          <LinkContainerStyled onClick={hiddenMenu}>
+            Discover
+            </LinkContainerStyled>
+        </Link> }
+        { userLogged && <Link to='/favorites'>
+            <LinkContainerStyled onClick={hiddenMenu}>Favorites
+            </LinkContainerStyled>
+        </Link> }
+        <Link to='/login'>
+          <AuthContainerStyled onClick={() => handleModalLogout()}>
+            {userLogged
+              ? <>Logout</>
+              : <>Login</>
+            }
+          </AuthContainerStyled>
+        </Link>
+      </LinksContainerStyled>
+    </MenuContainerStyled>
   )
 }
 

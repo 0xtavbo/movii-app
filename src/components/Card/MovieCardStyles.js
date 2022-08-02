@@ -47,6 +47,11 @@ export const MovieCardStyled = styled(motion.div)`
   .green {
     color: green;
   }
+
+  @media (max-width: 400px) {
+    height: ${(props) =>
+      props.favorite ? "calc(100vh / 1.22)" : "calc(100vh / 0.85)"};
+  }
 `;
 
 export const SpanStyled = styled.span`
