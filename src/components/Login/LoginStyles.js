@@ -19,14 +19,6 @@ export const LoginContainerStyled = styled.div`
   align-items: center;
   padding: 2rem 0.5rem;
   gap: 0.5rem;
-
-  :first-child {
-    background-color: var(--orange-bg);
-    img {
-      padding-top: 7px;
-      padding-bottom: 7px;
-    }
-  }
 `;
 
 export const LoginButtonStyled = styled.button`
@@ -43,12 +35,6 @@ export const LoginButtonStyled = styled.button`
   padding: 0.7rem 2rem;
   margin: 1rem;
   transition: all 0.1s ease-in;
-
-  @media screen and (max-width: 45em) {
-    padding: 1rem 1rem;
-    font-size: 1.5rem;
-    margin: 0.5rem;
-  }
 `;
 
 export const InputStyled = styled.input`
@@ -64,6 +50,8 @@ export const InputStyled = styled.input`
   margin-top: 5px;
   margin-bottom: 5px;
   font-size: 16px;
+  color: black;
+  background-color: white;
 `;
 
 export const TitleStyled = styled.h2`
