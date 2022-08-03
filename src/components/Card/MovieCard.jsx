@@ -24,7 +24,7 @@ const MovieCard = ({isFavorite, favorites, handleFavorite, id, img, title, ratin
           scale: 1.05,
           transition: { duration: 0.5 },
           }}
-      > 
+      >
         <FavoriteIconStyled
           onClick={(e) => {
             toggleFavorite();
