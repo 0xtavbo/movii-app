@@ -23,10 +23,14 @@ const MovieCard = ({isFavorite, favorites, handleFavorite, id, img, title, ratin
     {isFavorite ?
       // render Card for Favorites
       <MovieCardStyled favorite
-        whileHover={(widthSize <= mobileWidth) ? {
-          scale: 1.05,
-          transition: { duration: 0.5 },
-          } : {}}
+        whileHover={(widthSize <= mobileWidth)
+          ? { scale: 1,
+          transition: { duration: 0 },
+          }
+          : { scale: 1.05,
+            transition: { duration: 0.5 },
+          }
+        }
       >
         <FavoriteIconStyled
           onClick={(e) => {
@@ -45,10 +49,14 @@ const MovieCard = ({isFavorite, favorites, handleFavorite, id, img, title, ratin
     :
       // render Card for Discover and Search
       <MovieCardStyled
-        whileHover={(widthSize <= mobileWidth) ? {
-          scale: 1.05,
-          transition: { duration: 0.5 },
-          } : {}}
+        whileHover={(widthSize <= mobileWidth)
+          ? { scale: 1,
+          transition: { duration: 0 },
+          }
+          : { scale: 1.05,
+            transition: { duration: 0.5 },
+          }
+        }
       >
         <FavoriteIconStyled
           onClick={(e) => {
