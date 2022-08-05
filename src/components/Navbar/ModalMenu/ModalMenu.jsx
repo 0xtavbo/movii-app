@@ -6,14 +6,10 @@ LinksContainerStyled,
 LinkContainerStyled,
 AuthContainerStyled } from './ModalMenuStyles';
 import { Link } from 'react-router-dom';
-import {FiLogOut,FiLogIn} from "react-icons/fi";
+import { useSelector } from 'react-redux';
 
-const ModalMenu = ({hiddenMenu, isLogged, handleLogout}) => {
-  let userLogged = isLogged;
-
-  useEffect(() => {
-    userLogged = isLogged ? true : false;
-  }, [isLogged])
+const ModalMenu = ({hiddenMenu, handleLogout}) => {
+  const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
 
   const handleModalLogout = () => {
     handleLogout();
@@ -33,18 +29,18 @@ const ModalMenu = ({hiddenMenu, isLogged, handleLogout}) => {
         </CloseButtonStyled>
       </CloseButtonContainerStyled>
       <LinksContainerStyled>
-        { userLogged && <Link to='/discover'>
+        { isLoggedIn && <Link to='/discover'>
           <LinkContainerStyled onClick={hiddenMenu}>
             Discover
             </LinkContainerStyled>
         </Link> }
-        { userLogged && <Link to='/favorites'>
+        { isLoggedIn && <Link to='/favorites'>
             <LinkContainerStyled onClick={hiddenMenu}>Favorites
             </LinkContainerStyled>
         </Link> }
         <Link to='/login'>
           <AuthContainerStyled onClick={() => handleModalLogout()}>
-            {userLogged
+            {isLoggedIn
               ? <>Logout</>
               : <>Login</>
             }

@@ -16,16 +16,12 @@ import {BiArrowFromRight} from "react-icons/bi";
 
 const MovieDetails = () => {
   const navigate = useNavigate();
-  const token = localStorage.getItem('token');
+
   const [searchParams, ] = useSearchParams();
   const [movie, setMovie] = useState({});
   const [isLoading, setIsLoading] = useState(true);
 
   const movieID = searchParams.get('movieID');
-
-  useEffect(() => {
-    if(!token) navigate('/login');
-  }, [])
 
   useEffect(() => {
     const endPoint = `https://api.themoviedb.org/3/movie/${movieID}?api_key=41b1193a31de706dbf8d3e652263a058&language=en-US`;

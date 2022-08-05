@@ -6,16 +6,12 @@ import useAxiosSearch from '../../hooks/useAxiosSearch';
 
 const Results = ({handleFavorite, favorites}) => {
   const [searchParams, ] = useSearchParams();
+
   const [results, setResults] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+
   const keyword = searchParams.get('keyword');
   const { searchMovie } = useAxiosSearch();
-  const token = localStorage.getItem('token');
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    if(!token) navigate('/login');
-  }, [])
 
   useEffect(() => {
     const [error, pageNumber, searchResults, loading] = searchMovie(keyword);

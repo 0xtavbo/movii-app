@@ -1,15 +1,8 @@
 import React, { useEffect } from "react";
 import { ListContainer } from "../List/ListStyles";
 import MovieCard from "../Card/MovieCard";
-import { useNavigate } from "react-router-dom";
 
 const Favorites = ({handleFavorite, favorites}) => {
-  const navigate = useNavigate();
-  const token = localStorage.getItem("token");
-
-  useEffect(() => {
-    if (!token) navigate("/login");
-  }, []);
 
   return (
     <>

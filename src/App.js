@@ -1,6 +1,11 @@
 import "./App.css";
 import { useState, useEffect } from "react";
-import { Routes as ReactDomRoutes, Route } from "react-router-dom";
+import {
+  Routes as ReactDomRoutes,
+  Route,
+  Navigate,
+  useNavigate,
+} from "react-router-dom";
 import Login from "./components/Login/Login";
 import List from "./components/List/List";
 import Footer from "./components/Footer/Footer";
@@ -9,27 +14,31 @@ import Layout from "./components/Layout/Layout";
 import MovieDetails from "./components/Details/MovieDetails";
 import Results from "./components/Results/Results";
 import Favorites from "./components/Favorites/Favorites";
+import { useSelector } from "react-redux";
 
 function App() {
+  const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
+
   const [favoriteMovies, setFavoriteMovies] = useState([]);
-  const [isAuth, setIsAuth] = useState(false);
+
+  const navigate = useNavigate();
+
   let localFavorites;
   let tempFavMovies;
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      navigate("/discover");
+    } else {
+      navigate("/login");
+    }
+  }, [isLoggedIn]);
 
   useEffect(() => {
     const localFavorites = localStorage.getItem("movii_favs");
 
     if (localFavorites !== null) setFavoriteMovies(JSON.parse(localFavorites));
   }, []);
-
-  const handleLogout = () => {
-    localStorage.removeItem("token");
-    setIsAuth(false);
-  };
-
-  const handleLogin = () => {
-    setIsAuth(true);
-  };
 
   const handleFavorite = (e) => {
     localFavorites = localStorage.getItem("movii_favs");
@@ -67,7 +76,7 @@ function App() {
 
   return (
     <Layout>
-      <Navbar handleLogout={handleLogout} isAuth={isAuth} />
+      <Navbar />
 
       <ReactDomRoutes>
         <Route
@@ -76,7 +85,7 @@ function App() {
             <List handleFavorite={handleFavorite} favorites={favoriteMovies} />
           }
         />
-        <Route path="/login" element={<Login handleLogin={handleLogin} />} />
+        <Route path="/login" element={<Login />} />
         <Route path="/details" element={<MovieDetails />} />
         <Route
           path="/discover"

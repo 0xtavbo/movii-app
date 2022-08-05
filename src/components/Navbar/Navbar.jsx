@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React, {useState} from 'react'
 import { Link } from 'react-router-dom';
 import {
   LinkContainerStyled,
@@ -15,18 +15,23 @@ import Logo from '../../assets/logo.png';
 import Searcher from '../Searcher/Searcher';
 import {FiLogOut,FiLogIn,FiMenu} from "react-icons/fi";
 import { AnimatePresence } from 'framer-motion';
+import { useDispatch, useSelector } from 'react-redux';
+import { signOut } from '../../redux/slices/userSlice';
 
-const Navbar = ({handleLogout, isAuth}) => {
-  let isLogged = isAuth;
+const Navbar = () => {
+  const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
+
   const [menuIsOpen, setMenuIsOpen] = useState(false);
+
+  const dispatch = useDispatch();
 
   const hiddenMenu = () => {
     setMenuIsOpen(!menuIsOpen);
   }
 
-  useEffect(() => {
-    isLogged = isAuth ? true : false;
-  }, [isAuth])
+  const handleLogout = () => {
+    dispatch(signOut());
+  }
 
   return (
       <NavbarContainerStyled>
@@ -39,10 +44,10 @@ const Navbar = ({handleLogout, isAuth}) => {
           </Link>
         </LogoContainerStyled>
         <SearcherContainerStyled>
-          { isLogged && <Searcher />}
+          { isLoggedIn && <Searcher />}
         </SearcherContainerStyled>
         <LinksContainerStyled>
-        { isLogged && <Link to='/discover'>
+        { isLoggedIn && <Link to='/discover'>
           <LinkContainerStyled
                 whileHover={{
                 scale: 1.2,
@@ -52,7 +57,7 @@ const Navbar = ({handleLogout, isAuth}) => {
             Discover
             </LinkContainerStyled>
           </Link> }
-          { isLogged &&  <Link to='/favorites'>
+          { isLoggedIn &&  <Link to='/favorites'>
             <LinkContainerStyled
               whileHover={{
               scale: 1.2,
@@ -63,7 +68,7 @@ const Navbar = ({handleLogout, isAuth}) => {
           </Link> }
           <Link to='/login'>
             <AuthContainerStyled onClick={handleLogout}>
-              {isLogged
+              {isLoggedIn
                 ? <><FiLogOut className='filogout' />Logout</>
                 : <><FiLogIn className='filogin' />Login</>
               }
@@ -80,7 +85,6 @@ const Navbar = ({handleLogout, isAuth}) => {
         <AnimatePresence>{menuIsOpen
           && <ModalMenu
             hiddenMenu={hiddenMenu}
-            isLogged={isLogged}
             handleLogout={handleLogout}
           />}
         </AnimatePresence>

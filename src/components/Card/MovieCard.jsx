@@ -3,9 +3,12 @@ import { MovieCardStyled, SpanStyled, ButtonStyled, FavoriteIconStyled } from '.
 import { FiArrowRightCircle } from "react-icons/fi";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import { Link } from 'react-router-dom';
+import useScreenWidth from '../../hooks/useScreenWidth';
 
 const MovieCard = ({isFavorite, favorites, handleFavorite, id, img, title, rating, votes, overview, popularity}) => {
   const [isInFavorites, setIsInFavorites] = useState(false);
+
+  const [ mobileWidth, widthSize ] = useScreenWidth();
 
   useEffect(() => {
     setIsInFavorites(favorites.some(movie => movie.id.toString() === id.toString()));
@@ -20,10 +23,10 @@ const MovieCard = ({isFavorite, favorites, handleFavorite, id, img, title, ratin
     {isFavorite ?
       // render Card for Favorites
       <MovieCardStyled favorite
-        whileHover={{
+        whileHover={(widthSize <= mobileWidth) ? {
           scale: 1.05,
           transition: { duration: 0.5 },
-          }}
+          } : {}}
       >
         <FavoriteIconStyled
           onClick={(e) => {
@@ -42,10 +45,10 @@ const MovieCard = ({isFavorite, favorites, handleFavorite, id, img, title, ratin
     :
       // render Card for Discover and Search
       <MovieCardStyled
-        whileHover={{
+        whileHover={(widthSize <= mobileWidth) ? {
           scale: 1.05,
           transition: { duration: 0.5 },
-          }}
+          } : {}}
       >
         <FavoriteIconStyled
           onClick={(e) => {
@@ -70,9 +73,8 @@ const MovieCard = ({isFavorite, favorites, handleFavorite, id, img, title, ratin
         </Link>
       </MovieCardStyled>
     }
+
   </>
-
-
   )
 }
 

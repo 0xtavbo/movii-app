@@ -1,18 +1,19 @@
-import React, { useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { LoginContainerStyled, LoginWrapper, LoginButtonStyled, InputStyled, TitleStyled } from './LoginStyles'
 import swal from '@sweetalert/with-react';
-import { useNavigate } from 'react-router-dom';
 import useAxiosLogin from '../../hooks/useAxiosLogin';
+import {useSelector} from 'react-redux';
 
-const Login = ({handleLogin}) => {
-  const navigate = useNavigate();
+const Login = () => {
   const { loginSuccess, postLoginUser } = useAxiosLogin();
+
+  const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
+
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    const email = e.target.email.value;
-    const password = e.target.password.value;
 
     const regexEmail = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
@@ -35,34 +36,50 @@ const Login = ({handleLogin}) => {
   }
 
   useEffect(() => {
-    if (loginSuccess) {
+    if (isLoggedIn) {
       swal({
         title: "Logon successfully",
         icon: "success",
-        timer: 1500
-      });  
-      handleLogin();
-      navigate('/discover');
+        timer: 1250
+      });
     }
-  }, [loginSuccess])
+  }, [isLoggedIn])
 
   return (
     <LoginWrapper>
       <LoginContainerStyled>
         <TitleStyled>Login</TitleStyled>
+
         <form onSubmit={handleSubmit}>
           <label>
             <span>E-mail:</span>
-          <InputStyled type="email" name="email" placeholder='challenge@alkemy.org'/>
+            <InputStyled
+              type="email"
+              name="email"
+              placeholder='challenge@alkemy.org'
+              value={email}
+              onChange={e => setEmail(e.target.value)}
+              required
+            />
           </label>
           <br />
+
           <label>
             <span>Password:</span>
-          <InputStyled type="password" name="password" placeholder='react'/>
+            <InputStyled
+              type="password"
+              name="password"
+              placeholder='react'
+              value={password}
+              onChange={e => setPassword(e.target.value)}
+              required
+            />
           </label>
+
           <br />
-          <LoginButtonStyled type="submit">Enter</LoginButtonStyled>
+          <LoginButtonStyled type="submit">Login</LoginButtonStyled>
         </form>
+
       </LoginContainerStyled>
     </LoginWrapper>
   )

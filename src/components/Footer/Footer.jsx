@@ -3,7 +3,10 @@ import { FooterContainerStyled } from './FooterStyles'
 
 const Footer = () => {
   return (
-    <FooterContainerStyled>Movii © 2022</FooterContainerStyled>
+    <FooterContainerStyled>
+      <p>Movii © 2022</p>
+      <p>Gustavo Bordenave</p>
+    </FooterContainerStyled>
   )
 }
 
