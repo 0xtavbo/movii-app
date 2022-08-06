@@ -19,12 +19,7 @@ import { useSelector } from "react-redux";
 function App() {
   const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
 
-  const [favoriteMovies, setFavoriteMovies] = useState([]);
-
   const navigate = useNavigate();
-
-  let localFavorites;
-  let tempFavMovies;
 
   useEffect(() => {
     if (isLoggedIn) {
@@ -34,83 +29,17 @@ function App() {
     }
   }, [isLoggedIn]);
 
-  useEffect(() => {
-    const localFavorites = localStorage.getItem("movii_favs");
-
-    if (localFavorites !== null) setFavoriteMovies(JSON.parse(localFavorites));
-  }, []);
-
-  const handleFavorite = (e) => {
-    localFavorites = localStorage.getItem("movii_favs");
-
-    if (localFavorites === null) {
-      tempFavMovies = [];
-    } else {
-      tempFavMovies = JSON.parse(localFavorites);
-    }
-
-    const movieToHandle = {
-      id: e.currentTarget.dataset.movieId,
-      title: e.currentTarget.parentElement.querySelector("h3").innerText,
-      imgSource: e.currentTarget.parentElement
-        .querySelector("img")
-        .getAttribute("src"),
-    };
-
-    let movieIsInArray = tempFavMovies.find((movie) => {
-      return movie.id === movieToHandle.id;
-    });
-
-    if (!movieIsInArray) {
-      tempFavMovies.push(movieToHandle);
-      localStorage.setItem("movii_favs", JSON.stringify(tempFavMovies));
-      setFavoriteMovies(tempFavMovies);
-    } else {
-      let moviesLeft = tempFavMovies.filter((movie) => {
-        return movie.id !== movieToHandle.id;
-      });
-      localStorage.setItem("movii_favs", JSON.stringify(moviesLeft));
-      setFavoriteMovies(moviesLeft);
-    }
-  };
-
   return (
     <Layout>
       <Navbar />
 
       <ReactDomRoutes>
-        <Route
-          path="/"
-          element={
-            <List handleFavorite={handleFavorite} favorites={favoriteMovies} />
-          }
-        />
+        <Route path="/" element={<List />} />
         <Route path="/login" element={<Login />} />
         <Route path="/details" element={<MovieDetails />} />
-        <Route
-          path="/discover"
-          element={
-            <List handleFavorite={handleFavorite} favorites={favoriteMovies} />
-          }
-        />
-        <Route
-          path="/results"
-          element={
-            <Results
-              handleFavorite={handleFavorite}
-              favorites={favoriteMovies}
-            />
-          }
-        />
-        <Route
-          path="/favorites"
-          element={
-            <Favorites
-              handleFavorite={handleFavorite}
-              favorites={favoriteMovies}
-            />
-          }
-        />
+        <Route path="/discover" element={<List />} />
+        <Route path="/results" element={<Results />} />
+        <Route path="/favorites" element={<Favorites />} />
       </ReactDomRoutes>
 
       <Footer />

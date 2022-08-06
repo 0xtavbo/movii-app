@@ -4,7 +4,7 @@ import MovieCard from '../Card/MovieCard';
 import useAxiosDiscover from '../../hooks/useAxiosDiscover';
 import swal from '@sweetalert/with-react';
 
-const List = ({handleFavorite, favorites}) => {
+const List = () => {
   const [moviesList, setMoviesList] = useState([]);
   const [page, setPage] = useState(1);
 
@@ -28,9 +28,7 @@ const List = ({handleFavorite, favorites}) => {
     <ListContainer>
       { moviesList.map((movie) => {
         return (<MovieCard
-          favorites={favorites}
           isFavorite={false}
-          handleFavorite={handleFavorite}
           id={movie.id}
           key={movie.id}
           title={movie.title}

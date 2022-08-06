@@ -4,19 +4,24 @@ import { FiArrowRightCircle } from "react-icons/fi";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import { Link } from 'react-router-dom';
 import useScreenWidth from '../../hooks/useScreenWidth';
+import { useDispatch, useSelector } from 'react-redux';
+import { removeFromFavorites, addToFavorites } from '../../redux/slices/favoritesSlice';
 
-const MovieCard = ({isFavorite, favorites, handleFavorite, id, img, title, rating, votes, overview, popularity}) => {
-  const [isInFavorites, setIsInFavorites] = useState(false);
+const MovieCard = ({isFavorite, id, img, title, rating, votes, overview, popularity}) => {
+  const dispatch = useDispatch();
+
+  const favorites = useSelector(state => state.favorites.favorites);
+  const isMovieInFavorites = favorites.find((m) => m.id === id);
+
+  const handleFavorite = () => {
+    if (isMovieInFavorites) {
+      dispatch(removeFromFavorites({id: id}));
+    } else {
+      dispatch(addToFavorites({id: id, title: title, img: img}));
+    }
+  }
 
   const [ mobileWidth, widthSize ] = useScreenWidth();
-
-  useEffect(() => {
-    setIsInFavorites(favorites.some(movie => movie.id.toString() === id.toString()));
-  }, [isInFavorites])
-  
-  const toggleFavorite = () => {
-    setIsInFavorites(!isInFavorites)
-  }
 
   return (
   <>
@@ -33,17 +38,16 @@ const MovieCard = ({isFavorite, favorites, handleFavorite, id, img, title, ratin
         }
       >
         <FavoriteIconStyled
-          onClick={(e) => {
-            toggleFavorite();
-            handleFavorite(e);}
+          onClick={() => {
+            handleFavorite();}
           }
           data-movie-id={id}
         >
-          {isInFavorites ? <AiFillHeart style={{color: 'red'}}/> : <AiOutlineHeart />}
+          {isMovieInFavorites ? <AiFillHeart style={{color: 'red'}}/> : <AiOutlineHeart />}
         </FavoriteIconStyled>
         <Link to={`/details?movieID=${id}`}>
           <h3>{title}</h3>
-          <img src={img} alt={title} />
+          <img src={`https://image.tmdb.org/t/p/w500${img}`} alt={title} />
         </Link>
       </MovieCardStyled>
     :
@@ -59,13 +63,12 @@ const MovieCard = ({isFavorite, favorites, handleFavorite, id, img, title, ratin
         }
       >
         <FavoriteIconStyled
-          onClick={(e) => {
-            toggleFavorite();
-            handleFavorite(e);}
+          onClick={() => {
+            handleFavorite();}
           }
           data-movie-id={id}
         >
-          {isInFavorites ? <AiFillHeart style={{color: 'red'}}/> : <AiOutlineHeart />}
+          {isMovieInFavorites ? <AiFillHeart style={{color: 'red'}}/> : <AiOutlineHeart />}
         </FavoriteIconStyled>
         <Link to={`/details?movieID=${id}`}>
           <h3>{title}</h3>

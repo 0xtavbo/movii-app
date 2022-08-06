@@ -4,7 +4,7 @@ import { ListContainer } from '../List/ListStyles';
 import MovieCard from '../Card/MovieCard';
 import useAxiosSearch from '../../hooks/useAxiosSearch';
 
-const Results = ({handleFavorite, favorites}) => {
+const Results = () => {
   const [searchParams, ] = useSearchParams();
 
   const [results, setResults] = useState([]);
@@ -34,9 +34,7 @@ const Results = ({handleFavorite, favorites}) => {
         <ListContainer>
           { results.map((movie) => {
             return (<MovieCard
-              favorites={favorites}
               isFavorite={false}
-              handleFavorite={handleFavorite}
               id={movie.id}
               key={movie.id}
               title={movie.title}

@@ -1,5 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 import userReducer from "./slices/userSlice";
+import favoritesReducer from "./slices/favoritesSlice";
 import storageSession from "reduxjs-toolkit-persist/lib/storage/session";
 import storage from "redux-persist/lib/storage";
 import { persistReducer, persistStore } from "redux-persist";
@@ -8,7 +9,7 @@ import { combineReducers } from "redux";
 
 const rootPersistConfig = {
   key: "root",
-  storage,
+  storage: storage,
 };
 
 const userPersistConfig = {
@@ -17,8 +18,14 @@ const userPersistConfig = {
   blacklist: ["isLoggedIn"],
 };
 
+const favoritesPersistConfig = {
+  key: "favorites",
+  storage,
+};
+
 const rootReducer = combineReducers({
   user: persistReducer(userPersistConfig, userReducer),
+  favorites: persistReducer(favoritesPersistConfig, favoritesReducer),
 });
 
 const persistedReducer = persistReducer(rootPersistConfig, rootReducer);
