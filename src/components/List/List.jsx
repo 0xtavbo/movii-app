@@ -4,6 +4,7 @@ import MovieCard from '../Card/MovieCard';
 import useAxiosDiscover from '../../hooks/useAxiosDiscover';
 import swal from '@sweetalert/with-react';
 import { useIntersectionObserver } from '@react-hooks-library/core';
+import { v4 as uuidv4 } from 'uuid';
 
 const List = () => {
   const [moviesList, setMoviesList] = useState([]);
@@ -40,7 +41,7 @@ const List = () => {
           return (<MovieCard
             isFavorite={false}
             id={movie.id}
-            key={movie.id}
+            key={movie.id+uuidv4()}
             title={movie.title}
             img={movie.poster_path}
             rating={movie.vote_average}
