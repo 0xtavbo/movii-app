@@ -43,6 +43,10 @@ export const LinksContainerStyled = styled.div`
     padding: 1rem 1.5rem;
   }
 
+  .fav-link {
+    position: relative;
+  }
+
   @media (max-width: 400px) {
     display: none;
   }
@@ -53,7 +57,10 @@ export const LinkContainerStyled = styled(motion.div)`
   flex-direction: row;
   font-size: 1.1rem;
   align-items: center;
-  margin-right: 20px;
+  margin-right: 0px;
+  width: 70px;
+  z-index: 3;
+  position: relative;
 `;
 
 export const AuthContainerStyled = styled(motion.div)`
@@ -119,4 +126,23 @@ export const BurgerMenuContainerStyled = styled.div`
 export const BurgerIconStyled = styled.div`
   display: flex;
   font-size: 2.5rem;
+`;
+
+export const FavoritesCounterStyled = styled.div`
+  position: absolute;
+  font-size: 1.3rem;
+  display: flex;
+  top: 11px;
+  left: 98px;
+  border-radius: 100%;
+  border: 1px solid black;
+  padding: 10px;
+  background-color: #e83427;
+  color: black;
+  font-weight: 500;
+  height: 8px;
+  width: 5px;
+  justify-content: center;
+  align-items: center;
+  z-index: 2;
 `;

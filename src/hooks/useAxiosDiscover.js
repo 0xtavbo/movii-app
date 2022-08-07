@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 
 const useAxiosDiscover = (page) => {
-  const [pageNumber, setPageNumber] = useState("");
+  const [pageNumber, setPageNumber] = useState(1);
   const [results, setResults] = useState([]);
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(true);
@@ -25,7 +25,11 @@ const useAxiosDiscover = (page) => {
       .finally(() => setIsLoading(false));
   };
 
-  return [error, pageNumber, results, isLoading];
+  const refetchData = (page) => {
+    fetchData(page);
+  };
+
+  return { error, pageNumber, results, isLoading, refetchData };
 };
 
 export default useAxiosDiscover;

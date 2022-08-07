@@ -1,5 +1,5 @@
-import "./App.css";
-import { useState, useEffect } from "react";
+import "./styles/App.css";
+import { useEffect } from "react";
 import {
   Routes as ReactDomRoutes,
   Route,

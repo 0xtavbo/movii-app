@@ -7,19 +7,21 @@ import {
   SearcherContainerStyled,
   AuthContainerStyled,
   BurgerMenuContainerStyled,
-  BurgerIconStyled
+  BurgerIconStyled,
+  FavoritesCounterStyled
 } from './NavbarStyles';
 import ModalMenu from './ModalMenu/ModalMenu';
 import { LogoContainerStyled } from './NavbarStyles';
 import Logo from '../../assets/logo.png';
 import Searcher from '../Searcher/Searcher';
-import {FiLogOut,FiLogIn,FiMenu} from "react-icons/fi";
+import {FiLogOut,FiLogIn,FiMenu, FiHeart} from "react-icons/fi";
 import { AnimatePresence } from 'framer-motion';
 import { useDispatch, useSelector } from 'react-redux';
 import { signOut } from '../../redux/slices/userSlice';
 
 const Navbar = () => {
   const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
+  const counter = useSelector(state => state.favorites.counter);
 
   const [menuIsOpen, setMenuIsOpen] = useState(false);
 
@@ -57,13 +59,14 @@ const Navbar = () => {
             Discover
             </LinkContainerStyled>
           </Link> }
-          { isLoggedIn &&  <Link to='/favorites'>
+          { isLoggedIn &&  <Link to='/favorites' className='fav-link'>
             <LinkContainerStyled
               whileHover={{
               scale: 1.2,
               transition: { duration: 1 },
               }}
-            >Favorites
+            >
+              Favorites
             </LinkContainerStyled>
           </Link> }
           <Link to='/login'>
