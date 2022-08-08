@@ -8,7 +8,6 @@ import {
   AuthContainerStyled,
   BurgerMenuContainerStyled,
   BurgerIconStyled,
-  FavoritesCounterStyled
 } from './NavbarStyles';
 import ModalMenu from './ModalMenu/ModalMenu';
 import { LogoContainerStyled } from './NavbarStyles';

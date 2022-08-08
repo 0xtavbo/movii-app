@@ -9,8 +9,8 @@ const Login = () => {
 
   const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
 
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('eve.holt@reqres.in');
+  const [password, setPassword] = useState('cityslicka');
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -27,7 +27,7 @@ const Login = () => {
       return;
     }
 
-    if (email !== 'challenge@alkemy.org' || password !== 'react') {
+    if (email !== 'eve.holt@reqres.in' || password !== 'cityslicka') {
       swal({text: "Credentials invalid", html: true});
       return;
     }
@@ -56,7 +56,7 @@ const Login = () => {
             <InputStyled
               type="email"
               name="email"
-              placeholder='challenge@alkemy.org'
+              placeholder='eve.holt@reqres.in'
               value={email}
               onChange={e => setEmail(e.target.value)}
               required
@@ -69,7 +69,7 @@ const Login = () => {
             <InputStyled
               type="password"
               name="password"
-              placeholder='react'
+              placeholder='cityslicka'
               value={password}
               onChange={e => setPassword(e.target.value)}
               required

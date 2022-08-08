@@ -11,7 +11,7 @@ const useAxiosLogin = () => {
   const postLoginUser = async (email, password) => {
     try {
       await axios
-        .post("http://challenge-react.alkemy.org", { email, password })
+        .post("https://reqres.in/api/login", { email, password })
         .then((res) => {
           const tokenReceived = res.data.token;
           setAuthToken(tokenReceived);
