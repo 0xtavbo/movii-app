@@ -18,17 +18,20 @@ import {FiLogOut,FiLogIn,FiMenu, FiHeart} from "react-icons/fi";
 import { AnimatePresence } from 'framer-motion';
 import { useDispatch, useSelector } from 'react-redux';
 import { signOut } from '../../redux/slices/userSlice';
+import { closeMenu, openMenu } from '../../redux/slices/menuSlice';
 
 const Navbar = () => {
   const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
-  const counter = useSelector(state => state.favorites.counter);
-
-  const [menuIsOpen, setMenuIsOpen] = useState(false);
+  const isMenuOpen = useSelector((state) => state.menu.isMenuOpen);
 
   const dispatch = useDispatch();
 
-  const hiddenMenu = () => {
-    setMenuIsOpen(!menuIsOpen);
+  const handleMenu = () => {
+    if (isMenuOpen) {
+      dispatch(closeMenu());
+    } else {
+      dispatch(openMenu());
+    }    
   }
 
   const handleLogout = () => {
@@ -80,14 +83,12 @@ const Navbar = () => {
         </LinksContainerStyled>
         <BurgerMenuContainerStyled>
           <BurgerIconStyled>
-            <FiMenu onClick={() => {
-              setMenuIsOpen(!menuIsOpen);
-              }}/>
+            <FiMenu onClick={() => {handleMenu()}}/>
           </BurgerIconStyled>
         </BurgerMenuContainerStyled>
-        <AnimatePresence>{menuIsOpen
+        <AnimatePresence>{isMenuOpen
           && <ModalMenu
-            hiddenMenu={hiddenMenu}
+            hiddenMenu={handleMenu}
             handleLogout={handleLogout}
           />}
         </AnimatePresence>

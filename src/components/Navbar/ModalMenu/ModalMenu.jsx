@@ -35,8 +35,9 @@ const ModalMenu = ({hiddenMenu, handleLogout}) => {
             </LinkContainerStyled>
         </Link> }
         { isLoggedIn && <Link to='/favorites'>
-            <LinkContainerStyled onClick={hiddenMenu}>Favorites
-            </LinkContainerStyled>
+          <LinkContainerStyled onClick={hiddenMenu}>
+            Favorites
+          </LinkContainerStyled>
         </Link> }
         <Link to='/login'>
           <AuthContainerStyled onClick={() => handleModalLogout()}>

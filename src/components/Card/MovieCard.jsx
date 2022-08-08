@@ -13,6 +13,8 @@ const MovieCard = ({isFavorite, id, img, title, rating, votes, overview, popular
   const favorites = useSelector(state => state.favorites.favorites);
   const isMovieInFavorites = favorites.find((m) => m.id === id);
 
+  const isMenuOpen = useSelector((state) => state.menu.isMenuOpen);
+
   const handleFavorite = () => {
     if (isMovieInFavorites) {
       dispatch(removeFromFavorites({id: id}));
@@ -36,6 +38,7 @@ const MovieCard = ({isFavorite, id, img, title, rating, votes, overview, popular
             transition: { duration: 0.5 },
           }
         }
+        style={{zIndex: (isMenuOpen && (widthSize <= mobileWidth)) ? '-1' : '1'}}
       >
         <FavoriteIconStyled
           onClick={() => {
@@ -61,6 +64,7 @@ const MovieCard = ({isFavorite, id, img, title, rating, votes, overview, popular
             transition: { duration: 0.5 },
           }
         }
+        style={{zIndex: (isMenuOpen && (widthSize <= mobileWidth)) ? '-1' : '1'}}
       >
         <FavoriteIconStyled
           onClick={() => {
