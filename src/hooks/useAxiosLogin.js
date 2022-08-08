@@ -10,6 +10,7 @@ const useAxiosLogin = () => {
 
   const postLoginUser = async (email, password) => {
     try {
+      // fake login post to reqres.in
       await axios
         .post("https://reqres.in/api/login", { email, password })
         .then((res) => {
