@@ -7,7 +7,7 @@ export const MenuContainerStyled = styled(motion.div)`
   position: fixed;
   top: 0;
   right: 0;
-  gap: 30px;
+  gap: 10px;
   width: 45vw;
   height: 100vh;
   padding: 2rem;
@@ -45,7 +45,7 @@ export const CloseButtonStyled = styled(motion.button)`
 export const LinksContainerStyled = styled.div`
   color: white;
   justify-content: center;
-  align-items: center;
+  //align-items: center;
   gap: 40px;
   font-size: 1.5rem;
 
@@ -57,14 +57,14 @@ export const LinksContainerStyled = styled.div`
 export const LinkContainerStyled = styled(motion.div)`
   display: flex;
   flex-direction: row;
-  align-items: center;
+  //align-items: center;
   margin-right: 20px;
 `;
 
 export const AuthContainerStyled = styled(motion.div)`
   display: flex;
   flex-direction: row;
-  align-items: center;
+  //align-items: center;
   margin-right: 15px;
   width: 100px;
   font-size: 1.5rem;
@@ -72,5 +72,15 @@ export const AuthContainerStyled = styled(motion.div)`
   .filogout,
   .filogin {
     margin-right: 5px;
+  }
+`;
+
+export const SearcherContainerStyled = styled.div`
+  display: none;
+
+  @media (max-width: 400px) {
+    color: white;
+    display: flex;
+    justify-content: center;
   }
 `;

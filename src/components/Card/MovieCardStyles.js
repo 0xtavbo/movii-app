@@ -51,7 +51,6 @@ export const MovieCardStyled = styled(motion.div)`
   @media (max-width: 400px) {
     height: ${(props) =>
       props.favorite ? "calc(100vh / 1.22)" : "calc(100vh / 0.85)"};
-    z-index: 2;
   }
 `;
 

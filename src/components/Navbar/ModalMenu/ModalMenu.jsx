@@ -4,7 +4,10 @@ CloseButtonContainerStyled,
 CloseButtonStyled,
 LinksContainerStyled,
 LinkContainerStyled,
-AuthContainerStyled } from './ModalMenuStyles';
+AuthContainerStyled,
+SearcherContainerStyled
+} from './ModalMenuStyles';
+import Searcher from '../../Searcher/Searcher';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
@@ -28,6 +31,9 @@ const ModalMenu = ({hiddenMenu, handleLogout}) => {
           X
         </CloseButtonStyled>
       </CloseButtonContainerStyled>
+      <SearcherContainerStyled>
+        { isLoggedIn && <Searcher />}
+      </SearcherContainerStyled>
       <LinksContainerStyled>
         { isLoggedIn && <Link to='/discover'>
           <LinkContainerStyled onClick={hiddenMenu}>

@@ -22,6 +22,11 @@ export const InputStyled = styled.input`
   &:hover {
     border: 1px solid gray;
   }
+
+  @media (max-width: 400px) {
+    width: 120px;
+    border: 1px solid gray;
+  }
 `;
 
 export const IconWrapperStyled = styled.div`
